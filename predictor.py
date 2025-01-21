@@ -24,6 +24,9 @@ def play_with_stockfish(is_white):
                     board.push(best_move)
                     print(board)
 
+            if board.is_game_over():
+                break
+
             # Demander le coup de l'adversaire
             valid_move = False
             while not valid_move:
@@ -35,8 +38,11 @@ def play_with_stockfish(is_white):
                         valid_move = True
                     else:
                         print("Coup illégal, essayez à nouveau.")
-                except:
-                    print("Entrée invalide, veuillez entrer un coup correct (ex: Nf3 ou e5).")
+                except ValueError as e:
+                    print(f'Erreur : {e}')
+
+            if board.is_game_over():
+                break
 
             print(board)
             profondeur += 1
